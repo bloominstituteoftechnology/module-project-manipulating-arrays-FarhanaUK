@@ -30,9 +30,25 @@
     // ❗ Notes:
     // 🧠 There are many ways to solve this, but practice using a for loop to iterate over the array.
     // 🧠 As you have done in the past, declare a variable before you start looping, to accumulate the result.
+
+
     function sumNumsFor(nums) {
 
+      let results = 0;
+      for (i = 0; i < nums.length; i++) {
+        let element = nums[i]
+
+        if (typeof element === 'number') {
+          if (element === 13) {
+            return "I'm too superstitious!"
+          }
+          results += element
+        }
+      }
+      return results
+
     }
+
 
     // 👉 CHALLENGE 2
     // 🧠 The function stripVowels takes a string, strips all lowcase vowel letters (a,e,i,o,u) from it and returns it.
@@ -42,6 +58,15 @@
     // 🧠 There are many ways to solve this, but practice using a for loop to iterate over the characters of the string.
     function stripVowels(str) {
 
+      let results = []
+      for (index = 0; index < str.length; index++) {
+        let char = str[index]
+        if (char !== 'a' && char !== 'e' && char !== 'i' && char !== 'o' && char !== 'u') {
+          results.push(char)
+        }
+
+      }
+      return results.join('')
     }
 
     // 👉 CHALLENGE 3
@@ -49,7 +74,22 @@
     // 🧠 Examples of usage:
     // sumNumsWhile([1, 2, 3]) // should return 6
     // sumNumsWhile([1, 2, 13]) // should return "I'm too superstitious!"
-    function sumNumsWhile() {
+    function sumNumsWhile(nums) {
+      let results = 0;
+      idx = 0;
+      while (idx < nums.length) {
+        let element = nums[idx]
+
+        if (typeof element === 'number') {
+          if (element === 13) {
+            return "I'm too superstitious!"
+          }
+          results += element
+        }
+        idx++
+      }
+      return results
+
 
     }
 
@@ -70,7 +110,22 @@
     // 🧠 There are many ways to solve this, but practice using a while loop.
     // 🧠 Work out using pen and paper how the round number and the lifePoints change after each round.
     // 🧠 As long as there are lifePoints, decrease lifePoints by round number, and increase round number by one.
-    function fightMonsters() {
+    function fightMonsters(lifePoints) {
+
+
+      let round = 1;
+      while (lifePoints > 0) {
+
+        lifePoints -= round
+        if (lifePoints <= 0) {
+          return `You died in round ${round}`
+        }
+
+
+
+        round++
+      }
+
 
     }
 
@@ -81,8 +136,14 @@
     // findEvenNums([0, 1, 2, 3, 4]) // should return [0, 2, 4]
     // ❗ Notes:
     // 🧠 Use any kind of loop you'd like and the push method to populate the array of even numbers.
-    function findEvenNums() {
-
+    function findEvenNums(arr) {
+      newArr = []
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] % 2 === 0) {
+          newArr.push(arr[i])
+        }
+      }
+      return newArr
     }
 
     // 👉 CHALLENGE 6
@@ -92,8 +153,22 @@
     // 🧠 Ages in the subarrays should appear in the same order they appeared in the original array.
     // 🧠 Examples of usage:
     // separateAges([31, 12, 25, 65, 84, 20]) // should return [[12, 20], [31, 25, 65, 84]]
-    function separateAges() {
+    function separateAges(ages) {
 
+      array1 = []
+      array2 = []
+
+      for (let i in ages) {
+        if (ages[i] < 21) {
+          array1.push(ages[i])
+        } else {
+          array2.push(ages[i])
+        }
+
+      }
+
+
+      return [array1, array2]
     }
 
     // 👉 CHALLENGE 7
@@ -103,7 +178,14 @@
     // 🧠 The "tail" prop contains an array holding the elements of the array after the first one.
     // 🧠 Examples of usage:
     // headAndTail([1, 2, 3]) // should return { head: 1, tail: [2, 3] }
-    function headAndTail() {
+    function headAndTail(arr) {
+
+      let firstArr = arr[0]
+      let secondArr = arr.slice(1)
+      return { head: firstArr, tail: secondArr }
+
+
+
 
     }
 
@@ -114,8 +196,32 @@
     // nestedLoops(['hello', 'goodbye']) // should return ['hEllO', 'gOOdbyE']
     // ❗ Notes:
     // 🧠 To capitalize a string you can use its toUpperCase method: "a".toUpperCase() returns "A"
-    function nestedLoops() {
+    function nestedLoops(string) {
+      let newArray = []
 
+      for (i in string) {
+        let word = string[i]
+        let modified = ''
+        console.log(word)
+
+
+
+        for (i in word) {
+
+          let char = word[i]
+          console.log(char)
+          if ((char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u')) {
+            let upperCase = char.toUpperCase()
+            modified += upperCase
+          } else {
+            modified += char
+          }
+
+        }
+
+        newArray.push(modified)
+      }
+      return newArray
     }
 
     // 👉 CHALLENGE 9
@@ -129,77 +235,84 @@
     // 🧠 Practice using pop and slice.
     // 🧠 Note that pop modifies the original array in place and returns the "popped" element, whereas slice gives us a brand new array.
     function crazyTrimmer(arr) {
+  
+     if(arr.length % 2 === 0 ) {
+      arr.pop()
+      return arr
+     }else {
+      return arr.slice(1, arr.length -1)
+     }
 
     }
 
-    // 🧪 TESTS, do not work below this line
-    // 🧪 TESTS, do not work below this line
-    // 🧪 TESTS, do not work below this line
-    runTests('CHALLENGE 1 - sumNumsFor', sumNumsFor, [
-      [[[1, 2, 3]], 6],
-      [[[]], 0],
-      [[[1, 2, "x", 4]], 7],
-      [[[1, 2, 13, 3]], "I'm too superstitious!"],
-    ])
-    runTests('CHALLENGE 2 - stripVowels', stripVowels, [
-      [['aeiou'], ''],
-      [['xyz'], 'xyz'],
-      [['aeiouAEIOU'], 'AEIOU'],
-      [['precaution'], 'prctn'],
-    ])
-    runTests('CHALLENGE 3 - sumNumsWhile', sumNumsWhile, [
-      [[[1, 2, 3]], 6],
-      [[[]], 0],
-      [[[1, 2, "x", 4]], 7],
-      [[[1, 2, 13, 3]], "I'm too superstitious!"],
-    ])
-    runTests('CHALLENGE 4 - fightMonsters', fightMonsters, [
-      [[1], 'You died in round 1'],
-      [[2], 'You died in round 2'],
-      [[3], 'You died in round 2'],
-      [[10], 'You died in round 4'],
-      [[100], 'You died in round 14'],
-    ])
-    runTests('CHALLENGE 5 - findEvenNums', findEvenNums, [
-      [[[]], []],
-      [[[0]], [0]],
-      [[[1, 0, 5, 2, 4]], [0, 2, 4]],
-    ])
-    runTests('CHALLENGE 6 - separateAges', separateAges, [
-      [[[31, 12, 25, 65, 84, 20]], [[12, 20], [31, 25, 65, 84]]],
-      [[[1, 2, 3]], [[1, 2, 3], []]],
-      [[[21, 22, 23]], [[], [21, 22, 23]]],
-    ])
-    runTests('CHALLENGE 7 - headAndTail', headAndTail, [
-      [[[1, 2, 3]], { head: 1, tail: [2, 3] }],
-      [[["a", "b", "c"]], { head: "a", tail: ["b", "c"] }],
-    ])
-    runTests('CHALLENGE 8 - nestedLoops', nestedLoops, [
-      [[['aeiou', 'xyz']], ['AEIOU', 'xyz']],
-      [[['foo', 'bar', 'baz']], ['fOO', 'bAr', 'bAz']],
-    ])
-    runTests('CHALLENGE 9 - crazyTrimmer', crazyTrimmer, [
-      [[[1, 2, 3]], [2]],
-      [[[1, 2]], [1]],
-      [[[1, 2, 3, 4]], [1, 2, 3]],
-      [[[1, 2, 3, 4, 5]], [2, 3, 4]],
-    ])
-    function runTests(testName, func, tests) {
-      let results = []
-      tests.forEach(test => {
-        const argsList = test[0]
-        const expected = JSON.stringify(test[1])
-        const actual = JSON.stringify(func.apply(null, JSON.parse(JSON.stringify(argsList))))
-        results.push([argsList, expected, actual])
-      })
-      console.log('\n' + testName)
-      if (results.every(result => result[1] === result[2])) console.log('\t✅ All tests pass')
-      else results.forEach((result, idx) => {
-        if (result[1] === result[2]) console.log(`\t✅ Test ${idx + 1} passes`)
-        else console.log(`\t❌ Test ${idx + 1} fails: ${func.name}(${result[0]
-          .map(JSON.stringify)}) should return ${result[1]} but returns ${result[2]}`)
-      })
-    }
+      // 🧪 TESTS, do not work below this line
+      // 🧪 TESTS, do not work below this line
+      // 🧪 TESTS, do not work below this line
+      runTests('CHALLENGE 1 - sumNumsFor', sumNumsFor, [
+        [[[1, 2, 3]], 6],
+        [[[]], 0],
+        [[[1, 2, "x", 4]], 7],
+        [[[1, 2, 13, 3]], "I'm too superstitious!"],
+      ])
+      runTests('CHALLENGE 2 - stripVowels', stripVowels, [
+        [['aeiou'], ''],
+        [['xyz'], 'xyz'],
+        [['aeiouAEIOU'], 'AEIOU'],
+        [['precaution'], 'prctn'],
+      ])
+      runTests('CHALLENGE 3 - sumNumsWhile', sumNumsWhile, [
+        [[[1, 2, 3]], 6],
+        [[[]], 0],
+        [[[1, 2, "x", 4]], 7],
+        [[[1, 2, 13, 3]], "I'm too superstitious!"],
+      ])
+      runTests('CHALLENGE 4 - fightMonsters', fightMonsters, [
+        [[1], 'You died in round 1'],
+        [[2], 'You died in round 2'],
+        [[3], 'You died in round 2'],
+        [[10], 'You died in round 4'],
+        [[100], 'You died in round 14'],
+      ])
+      runTests('CHALLENGE 5 - findEvenNums', findEvenNums, [
+        [[[]], []],
+        [[[0]], [0]],
+        [[[1, 0, 5, 2, 4]], [0, 2, 4]],
+      ])
+      runTests('CHALLENGE 6 - separateAges', separateAges, [
+        [[[31, 12, 25, 65, 84, 20]], [[12, 20], [31, 25, 65, 84]]],
+        [[[1, 2, 3]], [[1, 2, 3], []]],
+        [[[21, 22, 23]], [[], [21, 22, 23]]],
+      ])
+      runTests('CHALLENGE 7 - headAndTail', headAndTail, [
+        [[[1, 2, 3]], { head: 1, tail: [2, 3] }],
+        [[["a", "b", "c"]], { head: "a", tail: ["b", "c"] }],
+      ])
+      runTests('CHALLENGE 8 - nestedLoops', nestedLoops, [
+        [[['aeiou', 'xyz']], ['AEIOU', 'xyz']],
+        [[['foo', 'bar', 'baz']], ['fOO', 'bAr', 'bAz']],
+      ])
+      runTests('CHALLENGE 9 - crazyTrimmer', crazyTrimmer, [
+        [[[1, 2, 3]], [2]],
+        [[[1, 2]], [1]],
+        [[[1, 2, 3, 4]], [1, 2, 3]],
+        [[[1, 2, 3, 4, 5]], [2, 3, 4]],
+      ])
+      function runTests(testName, func, tests) {
+        let results = []
+        tests.forEach(test => {
+          const argsList = test[0]
+          const expected = JSON.stringify(test[1])
+          const actual = JSON.stringify(func.apply(null, JSON.parse(JSON.stringify(argsList))))
+          results.push([argsList, expected, actual])
+        })
+        console.log('\n' + testName)
+        if (results.every(result => result[1] === result[2])) console.log('\t✅ All tests pass')
+        else results.forEach((result, idx) => {
+          if (result[1] === result[2]) console.log(`\t✅ Test ${idx + 1} passes`)
+          else console.log(`\t❌ Test ${idx + 1} fails: ${func.name}(${result[0]
+            .map(JSON.stringify)}) should return ${result[1]} but returns ${result[2]}`)
+        })
+      }
   </script>
 </body>
 
